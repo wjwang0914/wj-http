@@ -11,7 +11,7 @@ import retrofit2.Call;
 
 /**
  * 作者：wangwnejie on 2017/9/20 15:35
- * 邮箱：wangwenjie1303@stnts.com
+ * 邮箱：wang20080990@163.com
  */
 
 public abstract class GsonCallback<T> extends CommonCallback {

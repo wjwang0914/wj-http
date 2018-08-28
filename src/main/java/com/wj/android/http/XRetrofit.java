@@ -8,7 +8,7 @@ import retrofit2.Retrofit;
 
 /**
  * 作者：wangwnejie on 2017/9/28 13:42
- * 邮箱：wangwenjie1303@stnts.com
+ * 邮箱：wang20080990@163.com
  */
 
 public class XRetrofit {

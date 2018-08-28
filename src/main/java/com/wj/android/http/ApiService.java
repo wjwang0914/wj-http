@@ -24,7 +24,7 @@ import retrofit2.http.Url;
 
 /**
  * 作者：wangwnejie on 2017/9/18 17:19
- * 邮箱：wangwenjie1303@stnts.com
+ * 邮箱：wang20080990@163.com
  */
 
 public interface ApiService {

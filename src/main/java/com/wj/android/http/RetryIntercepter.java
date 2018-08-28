@@ -8,7 +8,7 @@ import okhttp3.Response;
 
 /**
  * 作者：wangwnejie on 2017/9/28 16:23
- * 邮箱：wangwenjie1303@stnts.com
+ * 邮箱：wang20080990@163.com
  */
 
 public class RetryIntercepter implements Interceptor {
