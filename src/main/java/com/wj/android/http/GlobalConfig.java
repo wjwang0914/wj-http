@@ -22,7 +22,9 @@ public class GlobalConfig {
     private OkHttpClient.Builder mOkHttpClientBuilder;
 
     private GlobalConfig() {
-        mOkHttpClientBuilder = new OkHttpClient.Builder();
+        mOkHttpClientBuilder = new OkHttpClient.Builder()
+                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory())
+                .hostnameVerifier(SSLSocketClient.getHostnameVerifier());
     }
 
     public static GlobalConfig getInstance() {
