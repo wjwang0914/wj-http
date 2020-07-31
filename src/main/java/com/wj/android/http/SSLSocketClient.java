@@ -15,10 +15,10 @@ import javax.net.ssl.X509TrustManager;
  * create time on 2019/5/27 15:04
  */
 public class SSLSocketClient {
-    public static SSLSocketFactory getSSLSocketFactory() {
+    public static SSLSocketFactory getSSLSocketFactory(X509TrustManager trustManager) {
         try {
             SSLContext sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, getTrustManager(), new SecureRandom());
+            sslContext.init(null, new TrustManager[]{trustManager}, new SecureRandom());
             return sslContext.getSocketFactory();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -26,27 +26,24 @@ public class SSLSocketClient {
     }
 
     //获取TrustManager
-    private static TrustManager[] getTrustManager() {
-        TrustManager[] trustAllCerts = new TrustManager[]{
-                new X509TrustManager() {
-                    @Override
-                    public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+    public static X509TrustManager getTrustManager() {
+        X509TrustManager trustManager = new X509TrustManager() {
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
 
-                    }
+            }
 
-                    @Override
-                    public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
 
-                    }
+            }
 
-                    @Override
-                    public X509Certificate[] getAcceptedIssuers() {
-                        return new X509Certificate[]{};
-                    }
-
-                }
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
         };
-        return trustAllCerts;
+        return trustManager;
     }
 
     //获取HostnameVerifier

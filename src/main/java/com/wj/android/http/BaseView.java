@@ -13,4 +13,6 @@ public interface BaseView {
 
     void end(int requestId);
 
+    boolean isLoadingEnable(int requestId);
+
 }

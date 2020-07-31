@@ -2,6 +2,8 @@ package com.wj.android.http;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.X509TrustManager;
+
 import okhttp3.Call;
 import okhttp3.CookieJar;
 import okhttp3.Interceptor;
@@ -22,9 +24,7 @@ public class GlobalConfig {
     private OkHttpClient.Builder mOkHttpClientBuilder;
 
     private GlobalConfig() {
-        mOkHttpClientBuilder = new OkHttpClient.Builder()
-                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory())
-                .hostnameVerifier(SSLSocketClient.getHostnameVerifier());
+        mOkHttpClientBuilder = new OkHttpClient.Builder();
     }
 
     public static GlobalConfig getInstance() {
@@ -40,6 +40,7 @@ public class GlobalConfig {
 
     public GlobalConfig debug(boolean debug) {
         if (debug) {
+            sslSocketFactory();
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             addInterceptor(loggingInterceptor);
@@ -82,6 +83,14 @@ public class GlobalConfig {
         return this;
     }
 
+    public GlobalConfig sslSocketFactory() {
+        X509TrustManager trustManager = SSLSocketClient.getTrustManager();
+        mOkHttpClientBuilder
+                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory(trustManager), trustManager)
+                .hostnameVerifier(SSLSocketClient.getHostnameVerifier());
+        return this;
+    }
+
     public GlobalConfig addCallAdapterFactory(CallAdapter.Factory factory) {
         XRetrofit.getRetrofitBuilder().addCallAdapterFactory(factory);
         return this;
@@ -96,6 +105,7 @@ public class GlobalConfig {
         XRetrofit.getRetrofitBuilder().callFactory(factory);
         return this;
     }
+
 
     public OkHttpClient.Builder getOkHttpClientBuilder() {
         return mOkHttpClientBuilder;
