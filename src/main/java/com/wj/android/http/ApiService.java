@@ -45,6 +45,9 @@ public interface ApiService {
     @POST
     Call<ResponseBody> postBody(@Url String url, @Body RequestBody requestBody);
 
+    @POST
+    Call<ResponseBody> postBodyWithHeader(@Url String url, @HeaderMap Map<String, String> headerMap, @Body RequestBody requestBody);
+
     @FormUrlEncoded
     @POST
     Call<ResponseBody> postWithHeader(@Url String url, @HeaderMap Map<String, String> headerMap, @FieldMap Map<String, String> params);

@@ -67,6 +67,10 @@ public class XRetrofit {
         RetrofitHttpManager.getInstance().postBody(url, content, commonCallback);
     }
 
+    public static void postBodyWithHeader(String url, Map<String, String> headerMap, String content, CommonCallback commonCallback) {
+        RetrofitHttpManager.getInstance().postBodyWithHeader(url, headerMap, content, commonCallback);
+    }
+
     public static void put(String url, Map<String, String> params, CommonCallback commonCallback) {
         RetrofitHttpManager.getInstance().put(url, params, commonCallback);
     }

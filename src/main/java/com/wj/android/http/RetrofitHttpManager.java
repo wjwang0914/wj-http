@@ -102,6 +102,12 @@ public class RetrofitHttpManager {
         execute(call, commonCallback);
     }
 
+    public void postBodyWithHeader(String url, Map<String, String> headerMap, String content, CommonCallback commonCallback) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"), content);
+        Call<ResponseBody> call = mApiService.postBodyWithHeader(url, headerMap, requestBody);
+        execute(call, commonCallback);
+    }
+
     public void put(String url, Map<String, String> params, CommonCallback commonCallback) {
         Call<ResponseBody> call = mApiService.put(url, params);
         execute(call, commonCallback);
