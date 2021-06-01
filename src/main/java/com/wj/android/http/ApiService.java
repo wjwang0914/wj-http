@@ -35,6 +35,12 @@ public interface ApiService {
     @GET
     Call<ResponseBody> get(@Url String url);
 
+    @GET
+    Call<ResponseBody> getWithHeader(@Url String url, @HeaderMap Map<String, String> headerMap);
+
+    @GET
+    Call<ResponseBody> getWithHeader(@Url String url, @HeaderMap Map<String, String> headerMap, @QueryMap Map<String, String> params);
+
     @FormUrlEncoded
     @POST
     Call<ResponseBody> post(@Url String url, @FieldMap Map<String, String> params);
@@ -57,12 +63,20 @@ public interface ApiService {
     Call<ResponseBody> put(@Url String url, @FieldMap Map<String, String> params);
 
     @FormUrlEncoded
+    @POST
+    Call<ResponseBody> putWithHeader(@Url String url, @HeaderMap Map<String, String> headerMap, @FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
     @PATCH
     Call<ResponseBody> patch(@Url String url, @FieldMap Map<String, String> params);
 
     @FormUrlEncoded
     @DELETE
     Call<ResponseBody> delete(@Url String url, @FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST
+    Call<ResponseBody> deleteWithHeader(@Url String url, @HeaderMap Map<String, String> headerMap, @FieldMap Map<String, String> params);
 
     @Multipart
     @POST

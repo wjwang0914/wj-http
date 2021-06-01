@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 
 /**
@@ -75,12 +77,28 @@ public class XRetrofit {
         RetrofitHttpManager.getInstance().put(url, params, commonCallback);
     }
 
+    public static void putWithHeader(String url, Map<String, String> headerMap, Map<String, String> params, CommonCallback commonCallback) {
+        RetrofitHttpManager.getInstance().putWithHeader(url, headerMap, params, commonCallback);
+    }
+
     public static void patch(String url, Map<String, String> params, CommonCallback commonCallback) {
         RetrofitHttpManager.getInstance().patch(url, params, commonCallback);
     }
 
     public static void delete(String url, Map<String, String> params, CommonCallback commonCallback) {
         RetrofitHttpManager.getInstance().delete(url, params, commonCallback);
+    }
+
+    public void deleteWithHeader(String url, Map<String, String> headerMap, Map<String, String> params, CommonCallback commonCallback) {
+        RetrofitHttpManager.getInstance().deleteWithHeader(url, headerMap, params, commonCallback);
+    }
+
+    public static void getWithHeader(String url, Map<String, String> headerMap, CommonCallback commonCallback) {
+        RetrofitHttpManager.getInstance().getWithHeader(url, headerMap, commonCallback);
+    }
+
+    public static void getWithHeader(String url, Map<String, String> headerMap, Map<String, String> params, CommonCallback commonCallback) {
+        RetrofitHttpManager.getInstance().getWithHeader(url, headerMap, params, commonCallback);
     }
 
     public static void postWithHeader(String url, Map<String, String> headerMap, Map<String, String> params, CommonCallback commonCallback) {

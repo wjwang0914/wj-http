@@ -113,6 +113,11 @@ public class RetrofitHttpManager {
         execute(call, commonCallback);
     }
 
+    public void putWithHeader(String url, Map<String, String> headerMap, Map<String, String> params, CommonCallback commonCallback) {
+        Call<ResponseBody> call = mApiService.putWithHeader(url, headerMap, params);
+        execute(call, commonCallback);
+    }
+
     public void patch(String url, Map<String, String> params, CommonCallback commonCallback) {
         Call<ResponseBody> call = mApiService.patch(url, params);
         execute(call, commonCallback);
@@ -120,6 +125,21 @@ public class RetrofitHttpManager {
 
     public void delete(String url, Map<String, String> params, CommonCallback commonCallback) {
         Call<ResponseBody> call = mApiService.delete(url, params);
+        execute(call, commonCallback);
+    }
+
+    public void deleteWithHeader(String url, Map<String, String> headerMap, Map<String, String> params, CommonCallback commonCallback) {
+        Call<ResponseBody> call = mApiService.deleteWithHeader(url, headerMap, params);
+        execute(call, commonCallback);
+    }
+
+    public void getWithHeader(String url, Map<String, String> headerMap, CommonCallback commonCallback) {
+        Call<ResponseBody> call = mApiService.getWithHeader(url, headerMap);
+        execute(call, commonCallback);
+    }
+
+    public void getWithHeader(String url, Map<String, String> headerMap, Map<String, String> params, CommonCallback commonCallback) {
+        Call<ResponseBody> call = mApiService.getWithHeader(url, headerMap, params);
         execute(call, commonCallback);
     }
 
