@@ -50,27 +50,13 @@ public class RetrofitHttpManager {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    if (!response.isSuccessful()) {
-                        onFailure(call, new Exception(String.format("%s : %d", "request failed, response's code is", response.code())));
-                        return;
-                    }
-                    if (response.body() == null) {
-                        onFailure(call, new Exception("service return data empty"));
-                        return;
-                    }
-                    commonCallback.onResponse(call,response.body());
-                    commonCallback.onFinish(call);
-
-                } catch (Exception e) {
-                    onFailure(call, e);
-                }
-
+                commonCallback.onResponse(call,response);
+                commonCallback.onFinish(call);
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                commonCallback.onFailure(call, t);
+                commonCallback.onFailure(call, t, 0);
                 commonCallback.onFinish(call);
             }
         });

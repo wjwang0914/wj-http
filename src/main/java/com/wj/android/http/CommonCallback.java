@@ -2,6 +2,7 @@ package com.wj.android.http;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * 作者：wangwnejie on 2017/9/20 11:48
@@ -14,10 +15,10 @@ public abstract class CommonCallback {
 
     }
 
-    public abstract void onResponse(Call<ResponseBody> call, ResponseBody responseBody);
+    public abstract void onResponse(Call<ResponseBody> call, Response<ResponseBody> response);
 
 
-    public abstract void onFailure(Call<ResponseBody> call, Throwable t);
+    public abstract void onFailure(Call<ResponseBody> call, Throwable t, int code);
 
     public void onFinish(Call<ResponseBody> call) {
 
