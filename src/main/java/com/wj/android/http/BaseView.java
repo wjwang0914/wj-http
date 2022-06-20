@@ -9,7 +9,7 @@ public interface BaseView {
 
     void start(int requestId);
 
-    void error(Throwable t, int requestId);
+    void error(Throwable t, int code, int requestId);
 
     void end(int requestId);
 

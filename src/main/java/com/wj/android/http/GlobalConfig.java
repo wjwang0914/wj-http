@@ -1,5 +1,6 @@
 package com.wj.android.http;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.X509TrustManager;
@@ -70,6 +71,11 @@ public class GlobalConfig {
 
     public GlobalConfig retryCount(int retryCount) {
         addInterceptor(new RetryIntercepter(retryCount));
+        return this;
+    }
+
+    public GlobalConfig addCommonHeaders(Map<String, String> headerMap) {
+        addInterceptor(new HeaderInterceptor(headerMap));
         return this;
     }
 
