@@ -75,6 +75,7 @@ public class GlobalConfig {
     }
 
     public GlobalConfig addCommonHeaders(Map<String, String> headerMap) {
+        RetrofitHttpManager.getInstance().destroy();
         addInterceptor(new HeaderInterceptor(headerMap));
         return this;
     }

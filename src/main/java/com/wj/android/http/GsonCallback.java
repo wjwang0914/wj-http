@@ -47,29 +47,20 @@ public abstract class GsonCallback<T> extends CommonCallback {
     }
 
     @Override
-    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+    public void onResponse(Call<ResponseBody> call, ResponseBody responseBody) {
         if(checkNull()) return;
         try{
-            if (!response.isSuccessful()) {
-                onFailure(call, new Exception(String.format("%s : %d", "request failed, response's code is", response.code())), response.code());
-                return;
-            }
-
-            if (response.body() == null) {
-                onFailure(call, new Exception("service return data empty"), response.code());
-                return;
-            }
-            T bean = (new Gson()).fromJson(this.convertResponse(((ResponseBody)response.body()).string()), getType(this));
-            onSuccess(bean, (BaseView)this.mBaseView.get());
+            T bean = new Gson().fromJson(convertResponse(responseBody.string()), getType(this));
+            onSuccess(bean, mBaseView.get());
         } catch (Exception e) {
-            onFailure(call,e, response.code());
+            onFailure(call,e);
         }
     }
 
     @Override
-    public void onFailure(Call<ResponseBody> call, Throwable t, int code) {
+    public void onFailure(Call<ResponseBody> call, Throwable t) {
         if(checkNull()) return;
-        mBaseView.get().error(t, code, mRequestId);
+        mBaseView.get().error(t,mRequestId);
     }
 
     @Override
