@@ -6,7 +6,9 @@ import java.util.concurrent.TimeUnit;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
+import okhttp3.ConnectionPool;
 import okhttp3.CookieJar;
+import okhttp3.Dispatcher;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -87,6 +89,19 @@ public class GlobalConfig {
 
     public GlobalConfig addNetworkInterceptor(Interceptor interceptor) {
         mOkHttpClientBuilder.addNetworkInterceptor(interceptor);
+        return this;
+    }
+
+    public GlobalConfig connectionPool(int maxIdleConnections, int keepAliveDuration) {
+        mOkHttpClientBuilder.connectionPool(new ConnectionPool(maxIdleConnections, keepAliveDuration, TimeUnit.MINUTES));
+        return this;
+    }
+
+    public GlobalConfig dispatcher(int maxRequests, int maxRequestsPerHost) {
+        Dispatcher dispatcher = new Dispatcher();
+        dispatcher.setMaxRequests(maxRequests);
+        dispatcher.setMaxRequestsPerHost(maxRequestsPerHost);
+        mOkHttpClientBuilder.dispatcher(dispatcher);
         return this;
     }
 
